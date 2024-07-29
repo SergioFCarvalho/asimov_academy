@@ -1,0 +1,58 @@
+site: https://sqliteonline.com/
+
+#criar tabelas
+
+CREATE TABLE usuarios (
+       id INT,
+       nome VARCHAR (255) NOT NULL COMMENT 'Nome do usuário',
+       email VARCHAR (100) NOT NULL UNIQUE COMMENT 'E-mail do usuário',
+	     endereco VARCHAR (50) NOT NULL COMMENT 'Endereço do usuário',
+       data_nascimento DATE NOT NULL COMMENT 'Data de nascimemnto do usuário');
+
+
+CREATE TABLE destinos (
+       id INT,
+       nome VARCHAR (255) NOT NULL UNIQUE COMMENT 'Nome do destino',
+  	   descricao VARCHAR (255) NOT NULL COMMENT 'Descrição do destino'
+);
+CREATE TABLE reservas (
+       id INT COMMENT 'Identificador único da reserva',
+       id_usuario INT COMMENT 'Referência ao ID do Usuário que fez reseva',
+       id_destino INT COMMENT 'Referência ao ID do Destino da reseva',
+	   data_ DATE COMMENT 'Data da reserva',
+	   status_ VARCHAR(255) DEFAULT 'pendente' COMMENT 'Status da reserva [confirmada, pedente, cancelada etc]'
+);
+
+---------------------------------------------------
+*Inserir users*
+
+INSERT into usuarios (id, nome, email, data_nascimento, endereco) VALUES (1, "Sérgio Freire", "teste@teste.com", "1992-05-20", "AV das Rosas, 88 - Bairro Candeias/PE");
+INSERT into usuarios (id, nome, email, data_nascimento, endereco) VALUES (2, "Saulo Freire", "sf@teste.com", "1992-03-29", "AV das Rosas, 88 - Bairro Candeias/PE"),
+(3, "Mary Freire", "mf@teste.com", "2000-03-29", "AV das asas,123- Bairro xyz/PE");
+
+INSERT INTO destinos (id, nome, descricao) VALUES (1, "Porto de Galinhas", "Praia do Litoral Sul de Pernambuco");
+INSERT INTO destinos (id, nome, descricao) VALUES (2, "Caruaru", "Capital do maior SJ do mundo"), (3, "RJ", "Estado brasileiro com uma das 7 maravilhas do mundo"); 
+
+INSERT INTO reservas (id, id_usuario, id_destino, status_, data_) values (1, 1, 1, 'pendente', '2024-10-10');
+INSERT INTO reservas (id, id_usuario, id_destino, status_, data_) values (2, 2, 1, 'confirmado', '2024-08-10'), (3, 3, 3, 'cancelada', '2024-06-23');
+
+* Seleciona a tabela e mostra *
+SELECT * FROM usuarios 
+SELECT * FROM destinos 
+SELECT * FROM reservas 
+
+
+-------------------------------------------------
+A função os.path.join() é utilizada no código que você enviou para criar caminhos de arquivos ou diretórios de forma segura e eficiente. Ela concatena diversos componentes de um caminho, garantindo a separação correta de diretórios de acordo com o sistema operacional.
+
+No código que você forneceu, a função os.path.join() é utilizada duas vezes da seguinte maneira:
+
+Para criar o caminho completo do arquivo de origem (from_path):
+from_path = os.path.join(cwd, file)
+Neste trecho, os.path.join(cwd, file) concatena o caminho do diretório atual (cwd) com o nome do arquivo (file), formando o caminho completo do arquivo de origem.
+
+Para criar o caminho completo do arquivo de destino (to_path):
+to_path = os.path.join(cwd, file.split('.')[-1], file)
+Neste caso, os.path.join(cwd, file.split('.')[-1], file) concatena o caminho do diretório atual (cwd) com o tipo de arquivo (obtido pela extensão do arquivo) e o nome do arquivo, criando o caminho completo do arquivo de destino com o diretório correspondente ao tipo de arquivo.
+
+Dessa forma, a função os.path.join() é fundamental para garantir a construção correta dos caminhos de arquivos e diretórios no código.
